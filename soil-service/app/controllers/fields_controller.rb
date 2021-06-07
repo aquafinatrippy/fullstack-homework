@@ -7,7 +7,6 @@ class FieldsController < ActionController::Base
 
   #url /fields/3
   def show
-    logger.debug params[:second]
     original = FieldsService.instance.fetch_fields
 
     mutated = original.each do |u|
