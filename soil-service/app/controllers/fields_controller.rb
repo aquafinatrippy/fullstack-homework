@@ -9,19 +9,37 @@ class FieldsController < ActionController::Base
   def show
     logger.debug params[:second]
     original = FieldsService.instance.fetch_fields
-    
 
-
-
-    mutated = original.map do |u|
+    mutated = original.each do |u|
       if u[:id] == params[:id].to_i
-         u
-         logger.debug u[:crops]
+          u
+         u[:crops].map do | crop |
+          if crop[:year] == params[:year].to_i
+            case params[:newCrop].to_i
+            when 1
+               crop[:crop] = CropsService::SPRING_WHEAT
+            when 2
+              crop[:crop] = CropsService::WINTER_WHEAT
+            when 3
+              crop[:crop] = CropsService::RED_CLOVER
+            when 4
+              crop[:crop] = CropsService::WHITE_CLOVER
+            when 5
+              crop[:crop] = CropsService::BROAD_BEAN
+            when 6
+              crop[:crop] = CropsService::OATS
+            else
+              crop[:crop]
+            end
+          else
+            crop
+          end
+         end
       else
         u
       end
     end
-    render json: {msg: "ok", id: params[:id], year: params[:year], third: params[:test], json: mutated}
+    render json: {msg: "ok", id: params[:id], year: params[:year], newCrop: params[:newCrop], json: mutated}
   end
 
 
