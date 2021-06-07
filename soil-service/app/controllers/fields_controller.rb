@@ -39,7 +39,7 @@ class FieldsController < ActionController::Base
         u
       end
     end
-    render json: {msg: "ok", id: params[:id], year: params[:year], newCrop: params[:newCrop], json: mutated}
+    render json: helpers.calculate_humus_delta(mutated)
   end
 
 
