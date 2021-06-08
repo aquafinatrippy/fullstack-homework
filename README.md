@@ -33,6 +33,11 @@ How to calculate humus balance based on our data?
 * Ruby 3.0.0
 * Yarn
 
+### Run with Docker
+* Start up docker
+* Go to project folder
+* Run command: `docker-compose up --build`
+
 ### Back-end: Soil Service
 * CD into the `soil-service` directory
 * Run `bundle install`
