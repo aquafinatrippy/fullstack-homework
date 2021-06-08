@@ -31,4 +31,12 @@ describe("<Table />", () => {
     expect(await shallow(<Table />)).toMatchSnapshot();
   });
 
+  it("loads data when component mounted", async () => {
+    expect(
+      await shallow(<Table />)
+        .instance()
+        .componentDidMount()
+    ).toMatchSnapshot();
+    // expect(shallow(<Table />).state("fields")).toExist();
+  });
 });
